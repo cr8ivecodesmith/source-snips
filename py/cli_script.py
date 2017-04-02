@@ -34,6 +34,16 @@ def __load_args():
         'Your script\'s long description go here'
     )
     parser.add_argument(
+        '-I',
+        '--stdin',
+        action='store_true',
+        default=False,
+        help=(
+            'Process input from STDIN. Best used processing output from a '
+            'pipe process.'
+        )
+    )
+    parser.add_argument(
         '--config',
         help=(
             'Specify config file. Must contain a valid JSON format. '
@@ -159,9 +169,16 @@ def __init_logger(config):
 
 
 def main():
+    """
+    NOTE:
+    If args.stdin is `True` then you may process values from the list-like
+    object `sys.stdin.readlines()`
+
+    """
     global args
     global config
     global log
+
     log.info('Main code has started')
 
 
